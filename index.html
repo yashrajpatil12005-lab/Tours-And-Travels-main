@@ -4,30 +4,33 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tadoba Trails</title>
+  <title>Shree Sadguru Tours and Travels - Tadoba Safari & Maharashtra Travel Packages</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
   <header class="navbar">
-    <div class="logo">
+    <a href="#home" class="logo">
       <img src="logo-travel.png" alt="Shree Sadguru Tours and Travels Logo" class="logo-img">
       <div class="logo-text">
         <h3 class="Company_name">Shree Sadguru Tours and Travels</h3>
+        <span>TRAVEL WITH COMFORT</span>
       </div>
-    </div>
+    </a>
 
+    <button class="menu-toggle" id="menuToggleBtn" aria-label="Toggle Menu">☰</button>
 
-    <nav>
+    <nav id="navMenu">
       <a href="#home">Home</a>
       <a href="#packages">Packages</a>
       <a href="#zones">Safari Zones</a>
+      <a href="#testimonials">Reviews</a>
+      <a href="#faq">FAQ</a>
       <a href="#about">About</a>
       <a href="#contact">Contact</a>
     </nav>
 
     <div class="nav-actions">
-      <!-- <a class="whatsapp" href="#">WhatsApp</a> -->
       <a class="whatsapp"
         href="https://wa.me/919975202821?text=Hi%20Sadguru%20Tours%20and%20Travels%20Team%2C%0AI%27m%20interested%20in%20Tour%20booking.">
         WhatsApp
@@ -263,7 +266,18 @@
       <!-- Kolara -->
       <div class="zone-card green">
         <span class="chance high">🌿 high tiger chance</span>
-        <div class="overlay-action">Explore Zone →</div>
+        <div class="zone-content">
+          <h3>Kolara Gate</h3>
+          <p>
+            The second most popular entry gate of Tadoba, providing excellent visibility and quick access to core paths.
+          </p>
+
+          <div class="zone-tags">
+            <span>Core Zone</span>
+            <span>Premium Resorts</span>
+            <span>High Sighting Rate</span>
+          </div>
+        </div>
       </div>
 
       <!-- Navegaon -->
@@ -363,6 +377,98 @@
         <div class="icon yellow">🔭</div>
         <h3>All Safari Zones</h3>
         <p>Access to all 6 zones including buffer and core areas</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- TESTIMONIALS SECTION -->
+  <section class="testimonials-section" id="testimonials">
+    <div class="safari-header">
+      <span class="zone-badge">⭐ Reviews</span>
+      <h2>What Our Travellers Say</h2>
+      <p>Real stories and feedback from travellers who explored Maharashtra with us</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Had an incredible tiger safari at Tadoba! We spotted three different tigers during our Moharli gate safaris. Shree Sadguru Tours made the bookings so seamless, and the guide was extremely knowledgeable."</p>
+        <div class="user-profile">
+          <div class="user-avatar" style="background-image: url('https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80');"></div>
+          <div class="user-meta">
+            <h4>Priya Sharma</h4>
+            <span>Mumbai</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"The Malvan trip was super fun and very well organized. Scuba diving, water sports at Tarkarli, and the historic Sindhudurg Fort tour were outstanding. Highly recommend their affordable packages!"</p>
+        <div class="user-profile">
+          <div class="user-avatar" style="background-image: url('https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80');"></div>
+          <div class="user-meta">
+            <h4>Aditya Verma</h4>
+            <span>Pune</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Our family booking to Mahabaleshwar and Panchgani was memorable. Mapro Garden, strawberry farm visits, and the gorgeous viewpoints. The driver was professional, and the hotel stay was great."</p>
+        <div class="user-profile">
+          <div class="user-avatar" style="background-image: url('https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=100&q=80');"></div>
+          <div class="user-meta">
+            <h4>Anjali Joshi</h4>
+            <span>Nagpur</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section class="faq-section" id="faq">
+    <div class="safari-header">
+      <span class="zone-badge">❓ FAQ</span>
+      <h2>Frequently Asked Questions</h2>
+      <p>Have questions about safari bookings, travel planning, or accommodations? Find answers below.</p>
+    </div>
+    <div class="faq-container">
+      <div class="faq-item">
+        <div class="faq-header">
+          <h4>How do I book a Tadoba safari slot?</h4>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-content">
+          <p>You can fill out our website booking form with your contact details, government ID proof (Aadhar/PAN), and package selection. Once submitted, our team will verify real-time safari gate availability and contact you via phone or WhatsApp to finalize slot details and payments.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-header">
+          <h4>What is included in the Tadoba Jungle Safari Package?</h4>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-content">
+          <p>Our standard package includes 2D/1N accommodation near the safari gates, all major meals (breakfast, lunch, dinner), one open Gypsy jungle safari ticket with expert guide fees, and pick-up/drop-off transport from the nearest station/airport.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-header">
+          <h4>Do you organize customized corporate or group tours?</h4>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-content">
+          <p>Yes, absolutely! We specialize in organizing custom group tours, family getaways, and corporate retreats to all destinations including Lonavala, Malvan, Mahabaleshwar, and Tadoba. Select the "Custom Package Enquiry" option in the form and add your requirements in the special requests area.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-header">
+          <h4>What are the rules regarding government ID proofs?</h4>
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-content">
+          <p>For safari bookings, the government forest department strictly requires a valid ID number (like Aadhar Card, PAN Card, or Passport) for all passengers. The same physical ID must be carried during the safari entry check. All bookings are non-transferable once registered with the forest department.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -499,12 +605,6 @@
           </div>
         </div>
 
-        <div class="info-item">
-
-          <div>
-
-          </div>
-        </div>
       </div>
     </div>
 

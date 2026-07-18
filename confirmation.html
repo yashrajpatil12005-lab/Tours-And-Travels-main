@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Booking Confirmed - Shree Sadguru Tours & Travels</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="confirmation-page">
+  <div class="conf-container">
+    <div class="conf-card">
+      <div class="conf-icon-wrapper">
+        <div class="conf-icon">✓</div>
+      </div>
+      
+      <h1>Booking Inquiry Received!</h1>
+      <p class="conf-lead">Thank you, <span id="summaryName">Guest</span>. We have successfully received your travel inquiry.</p>
+      
+      <div class="conf-summary">
+        <h3>Inquiry Summary</h3>
+        <div class="summary-grid">
+          <div class="summary-item">
+            <span class="label">Package Interest</span>
+            <span class="value" id="summaryPackage">-</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">Phone Number</span>
+            <span class="value" id="summaryPhone">-</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">Email Address</span>
+            <span class="value" id="summaryEmail">-</span>
+          </div>
+          <div class="summary-item">
+            <span class="label">ID Proof (Aadhar/PAN)</span>
+            <span class="value" id="summaryId">-</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="conf-actions">
+        <a href="#" id="whatsappConfirm" class="conf-whatsapp-btn" target="_blank">
+          <span class="icon">💬</span> Confirm Instantly via WhatsApp
+        </a>
+        <a href="tel:+919975202821" class="conf-call-btn">
+          <span class="icon">📞</span> Speak with Booking Representative
+        </a>
+      </div>
+
+      <a href="index.html" class="conf-home-link">Back to Home Page</a>
+    </div>
+  </div>
+
+  <script>
+    // Retrieve details from URL params or localStorage
+    const params = new URLSearchParams(window.location.search);
+    const name = params.get('name') || localStorage.getItem('last_booking_name') || 'Guest';
+    const email = params.get('email') || localStorage.getItem('last_booking_email') || '-';
+    const phone = params.get('phone') || localStorage.getItem('last_booking_phone') || '-';
+    const packageVal = params.get('package') || localStorage.getItem('last_booking_package') || 'Not Selected';
+    const idProof = params.get('id_proof') || localStorage.getItem('last_booking_id_proof') || '-';
+
+    document.getElementById('summaryName').innerText = name;
+    document.getElementById('summaryPackage').innerText = packageVal;
+    document.getElementById('summaryPhone').innerText = phone;
+    document.getElementById('summaryEmail').innerText = email;
+    document.getElementById('summaryId').innerText = idProof;
+
+    // Generate WhatsApp message text
+    const waText = encodeURIComponent(
+      `Hi Shree Sadguru Tours and Travels Team,\n\nI just submitted an inquiry on your website. Here is my request detail:\n\n👤 Name: ${name}\n📦 Package: ${packageVal}\n📞 Phone: ${phone}\n✉️ Email: ${email}\n🪪 ID Proof: ${idProof}\n\nPlease let me know the availability and pricing confirmation details.\n\nThank you!`
+    );
+    const waUrl = `https://wa.me/919975202821?text=${waText}`;
+    document.getElementById('whatsappConfirm').href = waUrl;
+  </script>
+</body>
+</html>

@@ -4,27 +4,36 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Book Safari - Tadoba Trails</title>
+  <title>Book Tour - Shree Sadguru Tours & Travels</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 
-<body class="booking-page" style="padding: 0px; margin: 0px">
-  <header class="navbar" style="align-self: flex-end; margin-top: 0px; position: fixed; top: 0px">
-    <div class="logo">
-      <h3>Shree Sadguru Tours and Travels</h3>
+<body class="booking-page">
+  <header class="navbar">
+    <a href="index.html" class="logo">
+      <div class="logo-text">
+        <h3 class="Company_name">Shree Sadguru Tours and Travels</h3>
+        <span>TRAVEL WITH COMFORT</span>
+      </div>
+    </a>
 
-    </div>
+    <button class="menu-toggle" id="menuToggleBtn" aria-label="Toggle Menu">☰</button>
 
-    <nav>
+    <nav id="navMenu">
       <a href="index.html">Home</a>
       <a href="index.html#packages">Packages</a>
       <a href="index.html#zones">Safari Zones</a>
+      <a href="index.html#testimonials">Reviews</a>
+      <a href="index.html#faq">FAQ</a>
       <a href="index.html#about">About</a>
       <a href="index.html#contact">Contact</a>
     </nav>
 
     <div class="nav-actions">
-      <a class="whatsapp" href="#">WhatsApp</a>
+      <a class="whatsapp"
+        href="https://wa.me/919975202821?text=Hi%20Sadguru%20Tours%20and%20Travels%20Team%2C%0AI%27m%20interested%20in%20Tour%20booking.">
+        WhatsApp
+      </a>
       <a class="book-btn" href="form.html">Book Now</a>
     </div>
   </header>
@@ -32,62 +41,95 @@
   <div class="booking-container">
     <a href="index.html" class="back-link">← Back to Home</a>
 
-    <div class="contact-card booking-card">
-      <h3 class="booking-title">Book Your Trip</h3>
-      <p class="booking-desc">Fill in your details to reserve your spot.</p>
-
-      <form id="safariForm" class="safari-form">
-        <div class="form-group">
-          <label for="name" class="booking-label">Name</label>
-          <input type="text" id="name" name="name" autocomplete="name" placeholder="Full Name" required
-            class="booking-input" />
+    <div class="booking-split-wrapper">
+      <!-- LEFT PANE: VALUE PROPOSITIONS -->
+      <div class="booking-left-pane">
+        <div class="left-pane-header">
+          <h2>Start Your Adventure</h2>
+          <p>Embark on a customized journey across Maharashtra’s premier wildlife sanctuaries, scenic beaches, and hill stations.</p>
         </div>
 
-        <div class="form-group">
-          <label for="email" class="booking-label">Email</label>
-          <input type="email" id="email" name="email" autocomplete="email" placeholder="email@example.com" required
-            class="booking-input" />
+        <div class="left-pane-features">
+          <div class="left-feature-item">
+            <div class="left-feature-icon">✓</div>
+            <span>Government Authorized Operator</span>
+          </div>
+          <div class="left-feature-item">
+            <div class="left-feature-icon">✓</div>
+            <span>Real-time Safari Slot Check</span>
+          </div>
+          <div class="left-feature-item">
+            <div class="left-feature-icon">✓</div>
+            <span>Expert Naturalists & Gypsy Drivers</span>
+          </div>
+          <div class="left-feature-item">
+            <div class="left-feature-icon">✓</div>
+            <span>Safe & Affordable Packages</span>
+          </div>
         </div>
 
-        <div class="form-group">
-          <label for="phone" class="booking-label">Phone Number</label>
-          <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+91 98765 43210" required
-            class="booking-input" />
+        <div class="left-pane-footer">
+          <small>Need Immediate Assistance?</small>
+          <strong>Call Us: +91 9975202821</strong>
         </div>
+      </div>
 
-        <!-- NEW ID FIELD -->
-        <div class="form-group">
-          <label for="id_proof" class="booking-label">Government ID (Aadhar/PAN)</label>
-          <input type="text" id="id_proof" name="id_proof" autocomplete="off" placeholder="Enter ID Number" required
-            class="booking-input" />
-        </div>
+      <!-- RIGHT PANE: BOOKING CARD & FORM -->
+      <div class="booking-card">
+        <h3 class="booking-title">Book Your Trip</h3>
+        <p class="booking-desc">Fill in your details below. Our tour expert will check availability and call you back shortly.</p>
 
-        <div class="form-group">
-          <label for="package" class="booking-label">Package Interest</label>
-          <select id="package" name="package" class="booking-input">
-            <option value="">Select Package</option>
-            <option value="Tadoba Safari">Tadoba Jungle Safari Package</option>
-            <option value="Malvan">Malvan Package</option>
-            <option value="Mahabaleshwar">Mahabaleshwar & Panchgani Package</option>
-            <option value="Lonavala">Lonavala & Khandala Package</option>
-            <option value="Custom">Custom Package Enquiry</option>
-          </select>
-        </div>
+        <form id="safariForm" class="safari-form">
+          <div class="form-group">
+            <label for="name" class="booking-label">Name</label>
+            <input type="text" id="name" name="name" autocomplete="name" placeholder="Full Name" required
+              class="booking-input" />
+          </div>
 
-        <div class="form-group">
-          <label for="message" class="booking-label">Special Requests</label>
-          <textarea id="message" name="message" rows="3" placeholder="Travel dates, Group size, etc."
-            class="booking-input"></textarea>
-        </div>
+          <div class="form-group">
+            <label for="email" class="booking-label">Email</label>
+            <input type="email" id="email" name="email" autocomplete="email" placeholder="email@example.com" required
+              class="booking-input" />
+          </div>
 
-        <button type="submit" class="submit-btn mt-20">Submit Enquiry</button>
-      </form>
-      <div id="formStatus" class="form-status"></div>
+          <div class="form-group">
+            <label for="phone" class="booking-label">Phone Number</label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+91 98765 43210" required
+              class="booking-input" />
+          </div>
+
+          <!-- NEW ID FIELD -->
+          <div class="form-group">
+            <label for="id_proof" class="booking-label">Government ID (Aadhar/PAN)</label>
+            <input type="text" id="id_proof" name="id_proof" autocomplete="off" placeholder="Enter ID Number" required
+              class="booking-input" />
+          </div>
+
+          <div class="form-group">
+            <label for="package" class="booking-label">Package Interest</label>
+            <select id="package" name="package" required class="booking-input">
+              <option value="">Select Package</option>
+              <option value="Tadoba Safari">Tadoba Jungle Safari Package</option>
+              <option value="Malvan">Malvan Package</option>
+              <option value="Mahabaleshwar">Mahabaleshwar & Panchgani Package</option>
+              <option value="Lonavala">Lonavala & Khandala Package</option>
+              <option value="Custom">Custom Package Enquiry</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message" class="booking-label">Special Requests</label>
+            <textarea id="message" name="message" rows="3" placeholder="Travel dates, Group size, etc."
+              class="booking-input"></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">Submit Enquiry</button>
+        </form>
+      </div>
     </div>
   </div>
 
-  <!-- Success Modal -->
-  <!-- Dynamic Status Modal -->
+  <!-- Dynamic Status Modal (Fallback for Errors) -->
   <div id="statusModal" class="modal-overlay">
     <div class="modal-content">
       <div id="modalIcon" class="modal-icon">✓</div>

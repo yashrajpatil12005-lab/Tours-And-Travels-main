@@ -1,0 +1,7 @@
+{
+  "cleanUrls": true,
+  "rewrites": [
+    { "source": "/book", "destination": "/form.html" },
+    { "source": "/confirmation", "destination": "/confirmation.html" }
+  ]
+}

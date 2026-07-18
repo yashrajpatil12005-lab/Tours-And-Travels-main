@@ -1,32 +1,86 @@
-// Smooth Scrolling
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+// Smooth Scrolling (Safely ignores cross-page hash links)
+document.querySelectorAll('a[href*="#"]').forEach((anchor) => {
   anchor.addEventListener("click", function (e) {
-    e.preventDefault();
-    const targetId = this.getAttribute("href");
-    if (targetId === "#") return;
+    const href = this.getAttribute("href");
+    
+    // Check if the link is a hash link for the current page
+    const isCurrentPageHash = href.startsWith("#") || 
+      (window.location.pathname.endsWith("index.html") && href.includes("index.html#")) ||
+      (window.location.pathname === "/" && href.includes("index.html#"));
+      
+    if (isCurrentPageHash) {
+      const targetId = href.substring(href.indexOf("#"));
+      if (targetId === "#") return;
+      
+      const targetElement = document.querySelector(targetId);
+      if (targetElement) {
+        e.preventDefault();
+        
+        // Close mobile menu if open
+        const navMenu = document.getElementById("navMenu");
+        if (navMenu) {
+          navMenu.classList.remove("active");
+        }
+        
+        targetElement.scrollIntoView({
+          behavior: "smooth",
+        });
+      }
+    }
+  });
+});
 
-    const targetElement = document.querySelector(targetId);
-    if (targetElement) {
-      targetElement.scrollIntoView({
-        behavior: "smooth",
-      });
+// Mobile Navigation Toggle
+const menuToggleBtn = document.getElementById("menuToggleBtn");
+const navMenu = document.getElementById("navMenu");
+
+if (menuToggleBtn && navMenu) {
+  menuToggleBtn.addEventListener("click", () => {
+    navMenu.classList.toggle("active");
+  });
+
+  // Close menu when clicking outside of it
+  document.addEventListener("click", (e) => {
+    if (!navMenu.contains(e.target) && !menuToggleBtn.contains(e.target)) {
+      navMenu.classList.remove("active");
+    }
+  });
+}
+
+// Interactive FAQ Accordion
+const faqHeaders = document.querySelectorAll(".faq-header");
+
+faqHeaders.forEach((header) => {
+  header.addEventListener("click", () => {
+    const faqItem = header.parentElement;
+    const faqContent = faqItem.querySelector(".faq-content");
+    const isActive = faqItem.classList.contains("active");
+
+    // Close all other FAQ items first
+    document.querySelectorAll(".faq-item").forEach((item) => {
+      if (item !== faqItem) {
+        item.classList.remove("active");
+        item.querySelector(".faq-content").style.maxHeight = null;
+      }
+    });
+
+    // Toggle current FAQ item
+    if (isActive) {
+      faqItem.classList.remove("active");
+      faqContent.style.maxHeight = null;
+    } else {
+      faqItem.classList.add("active");
+      faqContent.style.maxHeight = faqContent.scrollHeight + "px";
     }
   });
 });
 
 // Form Submission to Google Apps Script
 const form = document.getElementById("safariForm");
-const statusDiv = document.getElementById("formStatus");
 const statusModal = document.getElementById("statusModal");
 const closeModalBtn = document.getElementById("modalBtn");
 
-// Dynamic Modal Elements
-const modalIcon = document.getElementById("modalIcon");
-const modalTitle = document.getElementById("modalTitle");
-const modalMessage = document.getElementById("modalMessage");
-const modalBtn = document.getElementById("modalBtn");
-
-// Close Modal Function
+// Close Modal Function (for error popups)
 function closeModal() {
   if (statusModal) {
     statusModal.classList.remove("active");
@@ -37,7 +91,6 @@ if (closeModalBtn) {
   closeModalBtn.addEventListener("click", closeModal);
 }
 
-// Close on outside click
 if (statusModal) {
   statusModal.addEventListener("click", (e) => {
     if (e.target === statusModal) {
@@ -46,26 +99,21 @@ if (statusModal) {
   });
 }
 
-// Helper to show modal
-function showModal(isSuccess, title, message) {
+// Helper to show modal for errors
+function showErrorModal(title, message) {
   if (!statusModal) return;
 
-  if (isSuccess) {
-    if (modalIcon) {
-      modalIcon.innerHTML = "✓";
-      modalIcon.classList.remove("error");
-    }
-    if (modalBtn) {
-      modalBtn.classList.remove("error");
-    }
-  } else {
-    if (modalIcon) {
-      modalIcon.innerHTML = "✕";
-      modalIcon.classList.add("error");
-    }
-    if (modalBtn) {
-      modalBtn.classList.add("error");
-    }
+  const modalIcon = document.getElementById("modalIcon");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalMessage = document.getElementById("modalMessage");
+  const modalBtn = document.getElementById("modalBtn");
+
+  if (modalIcon) {
+    modalIcon.innerHTML = "✕";
+    modalIcon.classList.add("error");
+  }
+  if (modalBtn) {
+    modalBtn.classList.add("error");
   }
 
   if (modalTitle) modalTitle.innerText = title;
@@ -82,7 +130,7 @@ if (form) {
     // Show loading state
     const submitBtn = form.querySelector(".submit-btn");
     const originalBtnText = submitBtn.innerText;
-    submitBtn.innerText = "Sending...";
+    submitBtn.innerText = "Submitting Inquiry...";
     submitBtn.disabled = true;
 
     // Collect data
@@ -90,7 +138,7 @@ if (form) {
     const data = Object.fromEntries(formData.entries());
     console.log("📦 Payload:", data);
 
-    // ✅ Replace with your actual Google Apps Script Web App URL
+    // Google Apps Script Web App URL
     const SCRIPT_URL =
       "https://script.google.com/macros/s/AKfycbwM7bmSCZ6Nkkzsf26Kxg5aLa2qoNeQfL_sV8B8yykkuWj3yh8o9mJ8rvPPIYUV6CCZ/exec";
     console.log("🔗 Target URL:", SCRIPT_URL);
@@ -120,26 +168,38 @@ if (form) {
       console.log("✅ Parsed Result:", result);
 
       if (result.result === "success") {
-        showModal(
-          true,
-          "Submission Successful!",
-          "Thank you for booking with us. We will get back to you shortly."
-        );
+        // Save to localStorage for confirmation page
+        localStorage.setItem("last_booking_name", data.name || "");
+        localStorage.setItem("last_booking_email", data.email || "");
+        localStorage.setItem("last_booking_phone", data.phone || "");
+        localStorage.setItem("last_booking_package", data.package || "");
+        localStorage.setItem("last_booking_id_proof", data.id_proof || "");
+
+        // Reset form
         form.reset();
+
+        // Redirect to booking confirmation page
+        const queryParams = new URLSearchParams({
+          name: data.name || "",
+          email: data.email || "",
+          phone: data.phone || "",
+          package: data.package || "",
+          id_proof: data.id_proof || ""
+        }).toString();
+
+        window.location.href = `confirmation.html?${queryParams}`;
       } else {
         console.error("❌ Server returned logic error:", result);
-        showModal(
-          false,
+        showErrorModal(
           "Submission Failed",
-          "There was an issue submitting your form. Please try again."
+          "There was an issue submitting your enquiry. Please verify details and try again."
         );
       }
     } catch (error) {
       console.error("Error!", error.message);
-      showModal(
-        false,
-        "Error",
-        "Could not connect to the server. Please check your internet connection or use WhatsApp."
+      showErrorModal(
+        "Connection Error",
+        "Could not connect to the booking server. Please verify your internet connection or call/WhatsApp us directly."
       );
     } finally {
       submitBtn.innerText = originalBtnText;

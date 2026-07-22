@@ -1555,18 +1555,22 @@ body.confirmation-page {
   display: flex;
   justify-content: space-between;
   font-size: 13.5px;
-  align-items: center;
-  gap: 10px;
+  align-items: flex-start;
+  gap: 16px;
 }
 
 .summary-item .label {
   color: var(--text-muted);
   font-weight: 600;
+  flex-shrink: 0;
 }
 
 .summary-item .value {
   color: var(--text-dark);
   font-weight: 700;
+  text-align: right;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .conf-actions {
@@ -1917,5 +1921,15 @@ body.confirmation-page {
   
   .conf-card {
     padding: 30px 20px;
+  }
+
+  .summary-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .summary-item .value {
+    text-align: left;
   }
 }
